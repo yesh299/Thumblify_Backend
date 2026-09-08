@@ -91,6 +91,12 @@ export const logoutUser = async (req: Request, res: Response) => {
       console.log(error);
       return res.status(500).json({ message: error.message });
     }
+    res.clearCookie("connect.sid", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      path: "/",
+    });
     return res.json({ message: "Logout successful" });
   });
 };
