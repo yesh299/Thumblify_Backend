@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const connectDB = async () => {
     try {
-        mongoose_1.default.connection.on("connected", () => console.log("✅ MongoDB connected ✅"));
+        mongoose_1.default.connection.on("connected", () => console.log("✅ MongoDB connected ho Gya✅"));
         await mongoose_1.default.connect(process.env.MONGODB_URI);
     }
     catch (error) {

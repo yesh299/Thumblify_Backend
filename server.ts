@@ -5,7 +5,7 @@ import connectDB from "./configs/db";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import AuthRouter from "./server/routes/AuthRoutes.js";
-import ThumbnailRouter from "./server/routes/thumbnailRoutes";
+import ThumbnailRouter from "./server/routes/ThumbnailRoutes";
 import UserRouter from "./server/routes/UserRoutes";
 
 declare module "express-session" {
