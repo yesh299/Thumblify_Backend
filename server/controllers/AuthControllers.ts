@@ -26,13 +26,19 @@ export const registerUser = async (req: Request, res: Response) => {
 
     req.session.isLoggedIn = true;
     req.session.userId = newUser._id;
-    return res.json({
-      message: "Account created successfully",
-      user: {
-        _id: newUser._id,
-        name: newUser.name,
-        email: newUser.email,
-      },
+    req.session.save((error) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: error.message });
+      }
+      return res.json({
+        message: "Account created successfully",
+        user: {
+          _id: newUser._id,
+          name: newUser.name,
+          email: newUser.email,
+        },
+      });
     });
   } catch (error: any) {
     console.log(error);
@@ -58,13 +64,19 @@ export const LoginUser = async (req: Request, res: Response) => {
     //* setting user data in sessions
     req.session.isLoggedIn = true;
     req.session.userId = user._id;
-    return res.json({
-      message: "Login successfully",
-      user: {
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-      },
+    req.session.save((error) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: error.message });
+      }
+      return res.json({
+        message: "Login successfully",
+        user: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+        },
+      });
     });
   } catch (error: any) {
     console.log(error);
