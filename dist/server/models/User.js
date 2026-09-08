@@ -13,6 +13,7 @@ const UserSchema = new mongoose_1.default.Schema({
         unique: true,
         lowercase: true,
     },
+    password: { type: String, required: true },
 }, { timestamps: true });
 const User = mongoose_1.default.models.User || mongoose_1.default.model("user", UserSchema);
 exports.default = User;

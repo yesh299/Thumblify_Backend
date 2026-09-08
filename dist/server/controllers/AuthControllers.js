@@ -44,7 +44,7 @@ const LoginUser = async (req, res) => {
         const { email, password } = req.body;
         //* find user by email
         const user = await User_1.default.findOne({ email });
-        if (user) {
+        if (!user) {
             return res.status(400).json({ message: "Invalid email or password" });
         }
         const isPasswordCorrect = await bcrypt_1.default.compare(password, user.password);
@@ -72,11 +72,12 @@ exports.LoginUser = LoginUser;
 //* Controllers For user Logout
 const logoutUser = async (req, res) => {
     req.session.destroy((error) => {
-        if (error)
+        if (error) {
             console.log(error);
-        return res.status(500).json({ message: error.message });
+            return res.status(500).json({ message: error.message });
+        }
+        return res.json({ message: "Logout successful" });
     });
-    return res.json({ message: "Logout successful" });
 };
 exports.logoutUser = logoutUser;
 //* Controllers For User verify

@@ -9,7 +9,9 @@ require("dotenv/config");
 const db_1 = __importDefault(require("./configs/db"));
 const express_session_1 = __importDefault(require("express-session"));
 const connect_mongo_1 = __importDefault(require("connect-mongo"));
-const AuthRoutes_1 = __importDefault(require("./server/routes/AuthRoutes"));
+const AuthRoutes_js_1 = __importDefault(require("./server/routes/AuthRoutes.js"));
+const thumbnailRoutes_1 = __importDefault(require("./server/routes/thumbnailRoutes"));
+const UserRoutes_1 = __importDefault(require("./server/routes/UserRoutes"));
 (0, db_1.default)();
 //* middleware
 const app = (0, express_1.default)();
@@ -32,7 +34,9 @@ const port = process.env.PORT || 3000;
 app.get("/", (req, res) => {
     res.send("Server is Live!");
 });
-app.use("/api/auth", AuthRoutes_1.default);
+app.use("/api/auth", AuthRoutes_js_1.default);
+app.use("/api/thumbnail", thumbnailRoutes_1.default);
+app.use("/api/user", UserRoutes_1.default);
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
