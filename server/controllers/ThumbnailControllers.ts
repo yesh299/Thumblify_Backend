@@ -137,7 +137,7 @@ export const generateThumbnail = async (req: Request, res: Response) => {
       resource_type: "image",
     });
 
-    thumbnail.imageUrl = uploadResult.url;
+    thumbnail.image_url = uploadResult.url;
     thumbnail.isGenerating = false;
     await thumbnail.save();
 
@@ -158,11 +158,11 @@ export const generateThumbnail = async (req: Request, res: Response) => {
 export const deleteThumbnail = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const {userId} = req.session;
+    const { userId } = req.session;
 
-    await Thumbnail.findByIdAndDelete({_id: id, userId})
+    await Thumbnail.findByIdAndDelete({ _id: id, userId });
 
-    res.json ({message: 'Thumbnail deleted successfully '})
+    res.json({ message: "Thumbnail deleted successfully " });
   } catch (error: any) {
     console.log(error);
     res.status(500).json({ message: error.message });
